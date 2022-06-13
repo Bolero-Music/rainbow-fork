@@ -1,5 +1,0 @@
-packages:
-  - 'packages/*'
-  - 'packages/create-rainbowkit/**/*-app'
-  - 'site'
-  - 'examples/*'
