@@ -66,9 +66,10 @@
     "qrcode": "1.5.0",
     "react-remove-scroll": "2.5.3"
   },
+  "homepage": "https://github.com/Bolero-Music/rainbow-fork#readme",
   "repository": {
     "type": "git",
-    "url": "git+git@github.com:Bolero-Music/rainbow-fork.git",
+    "url": "https://github.com/Bolero-Music/rainbow-fork",
     "directory": "packages/rainbowkit"
   }
 }

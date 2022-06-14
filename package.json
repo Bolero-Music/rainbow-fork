@@ -78,6 +78,12 @@
       "esbuild"
     ]
   },
+  "homepage": "https://github.com/Bolero-Music/rainbow-fork#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bolero-Music/rainbow-fork",
+    "directory": "packages/rainbowkit"
+  },
   "keywords": [],
   "author": "Valentin <valentin@boleromusic.com>",
   "license": "MIT"
