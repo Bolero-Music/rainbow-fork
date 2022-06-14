@@ -2,11 +2,11 @@
   <img alt="rainbowkit" src="https://user-images.githubusercontent.com/372831/168174718-685980e0-391e-4621-94a1-29bf83979fa5.png" />
 </a>
 
-# RainbowKit
+# Rainbow-fork
+
+# This is a rainbow fork to add Torus connector to our platform. A PR is in process on the official rainbow repository. I advice you to use the official if you don't especially need Torus connector.#
 
 **The best way to connect a wallet 🌈**
-
-**_ This is a rainbow fork to add Torus connector to our platform. A PR is in process on the official rainbow repository. I advice you to use the official if you don't especially need Torus connector._**
 
 RainbowKit is a [React](https://reactjs.org/) library that makes it easy to add wallet connection to your dapp.
 
