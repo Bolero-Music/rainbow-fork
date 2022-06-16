@@ -36,6 +36,8 @@ export const torus = (chains: Chain[]): Wallet => {
 export class TorusConnector extends InjectedConnector {
   private provider: any = undefined;
   private torus: any = undefined;
+  readonly id: string = 'torus';
+  readonly name: string = 'Torus';
   chains: any = undefined;
   constructor(chains: any) {
     super();
