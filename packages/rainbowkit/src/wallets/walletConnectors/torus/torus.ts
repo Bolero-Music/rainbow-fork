@@ -1,7 +1,6 @@
 import Torus from '@toruslabs/torus-embed';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { Chain } from '../../../components/RainbowKitProvider/RainbowKitChainContext';
-import { isMobile } from '../../../utils/isMobile';
 import { Wallet } from '../../Wallet';
 
 export interface TorusConnectorArguments {
@@ -10,7 +9,6 @@ export interface TorusConnectorArguments {
 }
 
 export const torus = (chains: Chain[]): Wallet => {
-  const shouldUseWalletConnect = isMobile();
   return {
     createConnector: () => {
       const connector = new TorusConnector(chains);
@@ -30,7 +28,7 @@ export const torus = (chains: Chain[]): Wallet => {
     iconBackground: '#0c64fc',
     iconUrl: async () => (await import('./torus.svg')).default,
     id: 'torus',
-    installed: !shouldUseWalletConnect,
+    installed: true,
     name: 'Torus',
   };
 };
