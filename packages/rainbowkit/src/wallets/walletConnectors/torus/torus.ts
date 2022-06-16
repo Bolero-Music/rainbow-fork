@@ -1,9 +1,7 @@
 import Torus from '@toruslabs/torus-embed';
 import { InjectedConnector } from 'wagmi/connectors/injected';
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { Chain } from '../../../components/RainbowKitProvider/RainbowKitChainContext';
-import { isAndroid, isMobile } from '../../../utils/isMobile';
-import { rpcUrlsForChains } from '../../../utils/rpcUrlsForChains';
+import { isMobile } from '../../../utils/isMobile';
 import { Wallet } from '../../Wallet';
 
 export interface TorusConnectorArguments {
@@ -15,29 +13,12 @@ export const torus = (chains: Chain[]): Wallet => {
   const shouldUseWalletConnect = isMobile();
   return {
     createConnector: () => {
-      const rpc = rpcUrlsForChains(chains);
-      const connector = shouldUseWalletConnect
-        ? new WalletConnectConnector({
-            chains,
-            options: {
-              qrcode: false,
-              rpc,
-            },
-          })
-        : new TorusConnector(chains);
+      const connector = new TorusConnector(chains);
 
       return {
         connector,
         mobile: {
-          getUri: shouldUseWalletConnect
-            ? async () => {
-                const { uri } = (await connector.getProvider()).connector;
-
-                return isAndroid()
-                  ? uri
-                  : `https://app.tor.us/wc?uri=${encodeURIComponent(uri)}`;
-              }
-            : undefined,
+          getUri: undefined,
         },
       };
     },
