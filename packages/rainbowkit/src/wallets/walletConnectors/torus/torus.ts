@@ -50,8 +50,10 @@ export class TorusConnector extends InjectedConnector {
     return this.provider;
   }
 
-  connect = async ({ id, network } = this.chains[0]) => {
+  connect = async () => {
     if (this.torus === undefined) this.torus = new Torus();
+    const chain = this.chains[0];
+    const { id, network } = chain;
     await this.torus.init({
       network: {
         chainId: id,
