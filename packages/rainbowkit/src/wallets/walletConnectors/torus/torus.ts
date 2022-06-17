@@ -40,7 +40,7 @@ export class TorusConnector extends InjectedConnector {
   readonly name: string = 'Torus';
   chains: any = undefined;
   constructor(chains: any) {
-    super();
+    super(chains);
     this.chains = chains;
   }
   async getProvider(): Promise<Ethereum | undefined> {

@@ -1,6 +1,6 @@
 {
   "name": "rainbow-fork",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "The best way to connect a wallet",
   "files": [
     "dist"
