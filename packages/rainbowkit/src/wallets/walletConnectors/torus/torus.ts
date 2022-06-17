@@ -39,9 +39,14 @@ export class TorusConnector extends InjectedConnector {
   readonly id: string = 'torus';
   readonly name: string = 'Torus';
   chains: any = undefined;
+  private network: any = undefined;
   constructor(chains: any) {
     super(chains);
     this.chains = chains;
+    this.network = {
+      chainId: chains[0].id,
+      host: chains[0].network,
+    };
   }
   async getProvider(): Promise<Ethereum | undefined> {
     return this.provider;
@@ -50,7 +55,7 @@ export class TorusConnector extends InjectedConnector {
   connect = async () => {
     if (this.torus === undefined) this.torus = new Torus();
     await this.torus.init({
-      network: {
+      network: this.network ?? {
         chainId: this.chains[0].id,
         host: this.chains[0].network,
       },
