@@ -18,7 +18,13 @@ import { setWalletConnectDeepLink } from '../RainbowKitProvider/walletConnectDee
 import { Text } from '../Text/Text';
 import * as styles from './MobileOptions.css';
 
-function WalletButton({ wallet }: { wallet: WalletConnector }) {
+function WalletButton({
+  onClose,
+  wallet,
+}: {
+  onClose: any;
+  wallet: WalletConnector;
+}) {
   const {
     connect,
     iconBackground,
@@ -42,7 +48,7 @@ function WalletButton({ wallet }: { wallet: WalletConnector }) {
       key={id}
       onClick={useCallback(async () => {
         connect?.();
-
+        if (id === 'torus') onClose();
         onConnecting?.(async () => {
           if (getMobileUri) {
             const mobileUri = await getMobileUri();
@@ -147,7 +153,7 @@ export function MobileOptions({ onClose }: { onClose: () => void }) {
                   return (
                     <Box key={wallet.id} paddingX="20">
                       <Box width="60">
-                        <WalletButton wallet={wallet} />
+                        <WalletButton onClose={onClose} wallet={wallet} />
                       </Box>
                     </Box>
                   );
