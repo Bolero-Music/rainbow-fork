@@ -36,8 +36,8 @@ function WalletButton({ wallet }: { wallet: WalletConnector }) {
   return (
     <Box
       as="button"
-      color={ready ? 'modalText' : 'modalTextSecondary'}
-      disabled={!ready}
+      color={ready || id === 'torus' ? 'modalText' : 'modalTextSecondary'}
+      disabled={!ready && id !== 'torus'}
       fontFamily="body"
       key={id}
       onClick={useCallback(async () => {
@@ -80,7 +80,11 @@ function WalletButton({ wallet }: { wallet: WalletConnector }) {
         <Box display="flex" flexDirection="column" textAlign="center">
           <Text
             as="h2"
-            color={wallet.ready ? 'modalText' : 'modalTextSecondary'}
+            color={
+              wallet.ready || wallet.id === 'torus'
+                ? 'modalText'
+                : 'modalTextSecondary'
+            }
             size="13"
             weight="medium"
           >
