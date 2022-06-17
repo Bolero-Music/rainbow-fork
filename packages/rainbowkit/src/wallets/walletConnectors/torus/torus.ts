@@ -50,11 +50,11 @@ export class TorusConnector extends InjectedConnector {
     return this.provider;
   }
 
-  connect = async ({ id: chainId, network } = this.chains[0]) => {
+  connect = async ({ id, network } = this.chains[0]) => {
     if (this.torus === undefined) this.torus = new Torus();
     await this.torus.init({
       network: {
-        chainId: chainId,
+        chainId: id,
         host: network,
       },
     });
@@ -63,14 +63,14 @@ export class TorusConnector extends InjectedConnector {
     const accounts: string[] = await this.provider.request({
       method: 'eth_accounts',
     });
-    const chainIdQueryValue = await this.provider.request({
+    const chainId = await this.provider.request({
       method: 'eth_chainId',
     });
     debugger;
     return {
       account: accounts[0],
       chain: {
-        id: chainIdQueryValue,
+        id: chainId,
         unsupported: false,
       },
       provider: this.provider,
