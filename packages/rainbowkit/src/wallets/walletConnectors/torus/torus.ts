@@ -7,8 +7,11 @@ export interface TorusConnectorArguments {
   chainId: number;
   loginOptions?: any;
 }
+export interface ToruOptions {
+  chains: Chain[];
+}
 
-export const torus = (chains: Chain[]): Wallet => {
+export const torus = ({ chains }: ToruOptions): Wallet => {
   return {
     createConnector: () => {
       const connector = new TorusConnector({ chains });
@@ -63,6 +66,7 @@ export class TorusConnector extends InjectedConnector {
     const chainIdQueryValue = await this.provider.request({
       method: 'eth_chainId',
     });
+    debugger;
     return {
       account: accounts[0],
       chain: {

@@ -34,7 +34,7 @@ export const getDefaultWallets = ({
         coinbase({ appName, chains }),
         metaMask({ chains, shimDisconnect: true }),
         walletConnect({ chains }),
-        torus(chains),
+        torus({ chains }),
         brave({ chains, shimDisconnect: true }),
         ...(needsInjectedWalletFallback
           ? [injected({ chains, shimDisconnect: true })]
