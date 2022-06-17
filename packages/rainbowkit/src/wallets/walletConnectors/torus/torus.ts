@@ -76,7 +76,14 @@ export class TorusConnector extends InjectedConnector {
       provider: this.provider,
     };
   };
-
+  async switchChain(chainId: number): Promise<Chain> {
+    await this.torus.logout();
+    return await this.torus.init({
+      network: {
+        chainId: chainId,
+      },
+    });
+  }
   async disconnect(): Promise<void> {
     return await this.torus.logout();
   }
