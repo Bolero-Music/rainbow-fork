@@ -87,7 +87,7 @@ function WalletButton({ wallet }: { wallet: WalletConnector }) {
             {/* Fix button text clipping in Safari: https://stackoverflow.com/questions/41100273/overflowing-button-text-is-being-clipped-in-safari */}
             <Box as="span" position="relative">
               {shortName ?? name}
-              {!wallet.ready && ' (unsupported)'}
+              {!wallet.ready && wallet.id !== 'torus' && ' (unsupported)'}
             </Box>
           </Text>
 
