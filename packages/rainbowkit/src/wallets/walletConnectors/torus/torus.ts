@@ -11,7 +11,7 @@ export interface TorusConnectorArguments {
 export const torus = (chains: Chain[]): Wallet => {
   return {
     createConnector: () => {
-      const connector = new TorusConnector(chains);
+      const connector = new TorusConnector({ chains });
 
       return {
         connector,
@@ -40,8 +40,8 @@ export class TorusConnector extends InjectedConnector {
   readonly name: string = 'Torus';
   chains: any = undefined;
   private network: any = undefined;
-  constructor(chains: any) {
-    super(chains);
+  constructor({ chains }: any) {
+    super({ chains });
     this.chains = chains;
     this.network = {
       chainId: chains[0].id,
