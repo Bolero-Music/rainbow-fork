@@ -1,6 +1,6 @@
 {
   "name": "rainbow-fork",
-  "version": "0.2.22",
+  "version": "0.5.0",
   "description": "The best way to connect a wallet",
   "files": [
     "dist"
@@ -42,7 +42,7 @@
     "ethers": ">=5.5.1",
     "react": ">=17",
     "react-dom": ">=17",
-    "wagmi": "^0.4.2"
+    "wagmi": "0.5.x || 0.6.x"
   },
   "devDependencies": {
     "@ethersproject/abstract-provider": "^5.5.1",
@@ -64,7 +64,7 @@
     "@vanilla-extract/sprinkles": "1.4.1",
     "clsx": "1.1.1",
     "qrcode": "1.5.0",
-    "react-remove-scroll": "2.5.3"
+    "react-remove-scroll": "2.5.4"
   },
   "homepage": "https://github.com/Bolero-Music/rainbow-fork#readme",
   "repository": {

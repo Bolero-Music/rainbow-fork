@@ -22,11 +22,12 @@ function WalletButton({
   onClose,
   wallet,
 }: {
-  onClose: any;
+  onClose: Function;
   wallet: WalletConnector;
 }) {
   const {
     connect,
+    connector,
     iconBackground,
     iconUrl,
     id,
@@ -35,6 +36,7 @@ function WalletButton({
     onConnecting,
     ready,
     shortName,
+    shouldCloseModalOnConnecting,
   } = wallet;
   const getMobileUri = mobile?.getUri;
   const coolModeRef = useCoolMode(iconUrl);
@@ -42,26 +44,61 @@ function WalletButton({
   return (
     <Box
       as="button"
-      color={ready || id === 'torus' ? 'modalText' : 'modalTextSecondary'}
-      disabled={!ready && id !== 'torus'}
+      color={ready ? 'modalText' : 'modalTextSecondary'}
+      disabled={!ready}
       fontFamily="body"
       key={id}
       onClick={useCallback(async () => {
         connect?.();
-        if (id === 'torus') onClose();
+
+        // We need to guard against "onConnecting" callbacks being fired
+        // multiple times since connector instances can be shared between
+        // wallets. Ideally wagmi would let us scope the callback to the
+        // specific "connect" call, but this will work in the meantime.
+        let callbackFired = false;
+
         onConnecting?.(async () => {
+          if (callbackFired) return;
+          callbackFired = true;
+
           if (getMobileUri) {
             const mobileUri = await getMobileUri();
-            setWalletConnectDeepLink({ mobileUri, name });
+
+            if (connector.id === 'walletConnect') {
+              setWalletConnectDeepLink({ mobileUri, name });
+            }
 
             if (mobileUri.startsWith('http')) {
-              window.open(mobileUri, '_blank', 'noreferrer,noopener');
+              // Workaround for https://github.com/rainbow-me/rainbowkit/issues/524.
+              // Using 'window.open' causes issues on iOS in non-Safari browsers and
+              // WebViews where a blank tab is left behind after connecting.
+              // This is especially bad in some WebView scenarios (e.g. following a
+              // link from Twitter) where the user doesn't have any mechanism for
+              // closing the blank tab.
+              // For whatever reason, links with a target of "_blank" don't suffer
+              // from this problem, and programmatically clicking a detached link
+              // element with the same attributes also avoids the issue.
+              const link = document.createElement('a');
+              link.href = mobileUri;
+              link.target = '_blank';
+              link.rel = 'noreferrer noopener';
+              link.click();
             } else {
               window.location.href = mobileUri;
             }
           }
         });
-      }, [connect, getMobileUri, onConnecting, name])}
+
+        shouldCloseModalOnConnecting && onClose();
+      }, [
+        connector,
+        connect,
+        getMobileUri,
+        onConnecting,
+        name,
+        onClose,
+        shouldCloseModalOnConnecting,
+      ])}
       ref={coolModeRef}
       style={{ overflow: 'visible', textAlign: 'center' }}
       type="button"
@@ -86,18 +123,14 @@ function WalletButton({
         <Box display="flex" flexDirection="column" textAlign="center">
           <Text
             as="h2"
-            color={
-              wallet.ready || wallet.id === 'torus'
-                ? 'modalText'
-                : 'modalTextSecondary'
-            }
+            color={wallet.ready ? 'modalText' : 'modalTextSecondary'}
             size="13"
             weight="medium"
           >
             {/* Fix button text clipping in Safari: https://stackoverflow.com/questions/41100273/overflowing-button-text-is-being-clipped-in-safari */}
             <Box as="span" position="relative">
               {shortName ?? name}
-              {!wallet.ready && wallet.id !== 'torus' && ' (unsupported)'}
+              {!wallet.ready && ' (unsupported)'}
             </Box>
           </Text>
 
@@ -148,7 +181,7 @@ export function MobileOptions({ onClose }: { onClose: () => void }) {
           >
             <Box display="flex" style={{ margin: '0 auto' }}>
               {wallets
-                .filter(wallet => wallet.ready || wallet.id === 'torus')
+                .filter(wallet => wallet.ready)
                 .map(wallet => {
                   return (
                     <Box key={wallet.id} paddingX="20">

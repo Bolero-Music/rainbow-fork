@@ -19,11 +19,11 @@ RainbowKit is a [React](https://reactjs.org/) library that makes it easy to add 
 You can scaffold a new RainbowKit + [wagmi](https://wagmi.sh) + [Next.js](https://nextjs.org) app with one of the following commands, using your package manager of choice:
 
 ```bash
-npm init @rainbow-me/rainbowkit
+npm init @rainbow-me/rainbowkit@latest
 # or
-yarn create @rainbow-me/rainbowkit
+yarn create @rainbow-me/rainbowkit@latest
 # or
-pnpm create @rainbow-me/rainbowkit
+pnpm create @rainbow-me/rainbowkit@latest
 ```
 
 ## Documentation
@@ -34,9 +34,9 @@ For full documentation, visit [rainbowkit.com](https://rainbowkit.com).
 
 You can use the CodeSandbox links below try out RainbowKit:
 
-- with [Create React App](https://codesandbox.io/s/dn3rho)
-- with [Create React App (TypeScript)](https://codesandbox.io/s/ilfuoy)
-- with [Next.js](https://codesandbox.io/s/tmxcc0)
+- with [Create React App](https://codesandbox.io/s/rainbowkit-create-react-app-1vwx1r)
+- with [Create React App (TypeScript)](https://codesandbox.io/s/rainbowkit-create-typescript-app-xuxnqy)
+- with [Next.js](https://codesandbox.io/s/rainbowkit-nextjs-gz890p)
 
 ## Examples
 
@@ -46,6 +46,8 @@ The following examples are provided in the [examples](./examples/) folder of thi
 - `with-next`
 - `with-next-custom-button`
 - `with-next-mint-nft`
+- `with-next-siwe-next-auth`
+- `with-next-siwe-iron-session`
 - `with-remix`
 
 ### Running examples
