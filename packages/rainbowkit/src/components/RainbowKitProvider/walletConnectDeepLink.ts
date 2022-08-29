@@ -7,13 +7,15 @@ export function setWalletConnectDeepLink({
   mobileUri: string;
   name: string;
 }) {
-  localStorage.setItem(
-    storageKey,
-    JSON.stringify({
-      href: mobileUri.split('?')[0],
-      name,
-    })
-  );
+  if (mobileUri.startsWith('http') && mobileUri.includes('?uri=')) {
+    localStorage.setItem(
+      storageKey,
+      JSON.stringify({
+        href: mobileUri.split('?')[0],
+        name,
+      })
+    );
+  }
 }
 
 export function clearWalletConnectDeepLink() {

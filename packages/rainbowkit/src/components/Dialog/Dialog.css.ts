@@ -3,7 +3,7 @@ import { sprinkles } from '../../css/sprinkles.css';
 
 const slideUp = keyframes({
   '0%': { transform: 'translateY(100%)' },
-  '100%': { transform: 'translateY(0)' },
+  '100%': { transform: 'translateY(0deg)' },
 });
 
 const fadeIn = keyframes({

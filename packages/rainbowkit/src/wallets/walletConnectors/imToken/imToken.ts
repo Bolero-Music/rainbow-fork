@@ -1,7 +1,8 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { Chain } from '../../../components/RainbowKitProvider/RainbowKitChainContext';
+import { rpcUrlsForChains } from '../../../utils/rpcUrlsForChains';
 import { Wallet } from '../../Wallet';
-import { getWalletConnectConnector } from '../../getWalletConnectConnector';
 
 export interface ImTokenOptions {
   chains: Chain[];
@@ -18,8 +19,14 @@ export const imToken = ({ chains }: ImTokenOptions): Wallet => ({
     qrCode: 'https://token.im/download',
   },
   createConnector: () => {
-    const connector = getWalletConnectConnector({ chains });
-
+    const rpc = rpcUrlsForChains(chains);
+    const connector = new WalletConnectConnector({
+      chains,
+      options: {
+        qrcode: false,
+        rpc,
+      },
+    });
     return {
       connector,
       mobile: {

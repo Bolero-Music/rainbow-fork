@@ -205,7 +205,6 @@ const unresponsiveProperties = defineProperties({
     },
     transition: {
       default: '0.125s ease',
-      transform: 'transform 0.125s ease',
     },
     userSelect: ['none'] as const,
     width: dimensions,

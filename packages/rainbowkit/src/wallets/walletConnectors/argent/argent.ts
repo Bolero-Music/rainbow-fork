@@ -1,8 +1,9 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { Chain } from '../../../components/RainbowKitProvider/RainbowKitChainContext';
 import { isAndroid } from '../../../utils/isMobile';
+import { rpcUrlsForChains } from '../../../utils/rpcUrlsForChains';
 import { Wallet } from '../../Wallet';
-import { getWalletConnectConnector } from '../../getWalletConnectConnector';
 
 export interface ArgentOptions {
   chains: Chain[];
@@ -20,7 +21,17 @@ export const argent = ({ chains }: ArgentOptions): Wallet => ({
     qrCode: 'https://argent.link/app',
   },
   createConnector: () => {
-    const connector = getWalletConnectConnector({ chains });
+    const rpc = rpcUrlsForChains(chains);
+    const connector = new WalletConnectConnector({
+      chains,
+      options: {
+        qrcode: false,
+        options: {
+          qrcode: false,
+          rpc,
+        },
+      },
+    });
 
     return {
       connector,

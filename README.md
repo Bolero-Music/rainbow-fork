@@ -2,9 +2,7 @@
   <img alt="rainbowkit" src="https://user-images.githubusercontent.com/372831/168174718-685980e0-391e-4621-94a1-29bf83979fa5.png" />
 </a>
 
-# Rainbow-fork
-
-# This is a rainbow fork to add Torus connector to our platform. A PR is in process on the official rainbow repository. I advice you to use the official if you don't especially need Torus connector.#
+# RainbowKit
 
 **The best way to connect a wallet 🌈**
 
@@ -19,11 +17,11 @@ RainbowKit is a [React](https://reactjs.org/) library that makes it easy to add 
 You can scaffold a new RainbowKit + [wagmi](https://wagmi.sh) + [Next.js](https://nextjs.org) app with one of the following commands, using your package manager of choice:
 
 ```bash
-npm init @rainbow-me/rainbowkit@latest
+npm init @rainbow-me/rainbowkit
 # or
-yarn create @rainbow-me/rainbowkit@latest
+yarn create @rainbow-me/rainbowkit
 # or
-pnpm create @rainbow-me/rainbowkit@latest
+pnpm create @rainbow-me/rainbowkit
 ```
 
 ## Documentation
@@ -34,9 +32,9 @@ For full documentation, visit [rainbowkit.com](https://rainbowkit.com).
 
 You can use the CodeSandbox links below try out RainbowKit:
 
-- with [Create React App](https://codesandbox.io/s/rainbowkit-create-react-app-1vwx1r)
-- with [Create React App (TypeScript)](https://codesandbox.io/s/rainbowkit-create-typescript-app-xuxnqy)
-- with [Next.js](https://codesandbox.io/s/rainbowkit-nextjs-gz890p)
+- with [Create React App](https://codesandbox.io/s/dn3rho)
+- with [Create React App (TypeScript)](https://codesandbox.io/s/ilfuoy)
+- with [Next.js](https://codesandbox.io/s/tmxcc0)
 
 ## Examples
 
@@ -46,8 +44,6 @@ The following examples are provided in the [examples](./examples/) folder of thi
 - `with-next`
 - `with-next-custom-button`
 - `with-next-mint-nft`
-- `with-next-siwe-next-auth`
-- `with-next-siwe-iron-session`
 - `with-remix`
 
 ### Running examples

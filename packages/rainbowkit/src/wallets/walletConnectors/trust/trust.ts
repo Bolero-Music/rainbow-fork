@@ -1,16 +1,15 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
-import { InjectedConnector } from 'wagmi/connectors/injected';
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { Chain } from '../../../components/RainbowKitProvider/RainbowKitChainContext';
 import { isAndroid } from '../../../utils/isMobile';
+import { rpcUrlsForChains } from '../../../utils/rpcUrlsForChains';
 import { Wallet } from '../../Wallet';
-import { getWalletConnectConnector } from '../../getWalletConnectConnector';
 
 export interface TrustOptions {
   chains: Chain[];
-  shimDisconnect?: boolean;
 }
 
-export const trust = ({ chains, shimDisconnect }: TrustOptions): Wallet => ({
+export const trust = ({ chains }: TrustOptions): Wallet => ({
   id: 'trust',
   name: 'Trust Wallet',
   iconUrl: async () => (await import('./trust.svg')).default,
@@ -22,21 +21,14 @@ export const trust = ({ chains, shimDisconnect }: TrustOptions): Wallet => ({
     qrCode: 'https://link.trustwallet.com',
   },
   createConnector: () => {
-    const inAppBrowser = Boolean(
-      typeof window !== 'undefined' && window.ethereum?.isTrust
-    );
-
-    if (inAppBrowser) {
-      return {
-        connector: new InjectedConnector({
-          chains,
-          options: { shimDisconnect },
-        }),
-      };
-    }
-
-    const connector = getWalletConnectConnector({ chains });
-
+    const rpc = rpcUrlsForChains(chains);
+    const connector = new WalletConnectConnector({
+      chains,
+      options: {
+        qrcode: false,
+        rpc,
+      },
+    });
     return {
       connector,
       mobile: {

@@ -15,13 +15,14 @@ import { TxItem } from './TxItem';
 const NUMBER_OF_VISIBLE_TXS = 3;
 
 interface TxListProps {
-  address: ReturnType<typeof useAccount>['address'];
+  accountData: ReturnType<typeof useAccount>['data'];
 }
 
-export function TxList({ address }: TxListProps) {
+export function TxList({ accountData }: TxListProps) {
   const recentTransactions = useRecentTransactions();
   const clearRecentTransactions = useClearRecentTransactions();
-  const { chain: activeChain } = useNetwork();
+  const { activeChain } = useNetwork();
+  const address = accountData?.address;
   const explorerLink = chainToExplorerUrl(activeChain);
   const visibleTxs = recentTransactions.slice(0, NUMBER_OF_VISIBLE_TXS);
   const hasTransactions = visibleTxs.length > 0;

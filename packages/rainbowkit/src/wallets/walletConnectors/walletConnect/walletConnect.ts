@@ -1,8 +1,9 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { Chain } from '../../../components/RainbowKitProvider/RainbowKitChainContext';
 import { isIOS } from '../../../utils/isMobile';
+import { rpcUrlsForChains } from '../../../utils/rpcUrlsForChains';
 import { Wallet } from '../../Wallet';
-import { getWalletConnectConnector } from '../../getWalletConnectConnector';
 
 export interface WalletConnectOptions {
   chains: Chain[];
@@ -16,9 +17,14 @@ export const walletConnect = ({ chains }: WalletConnectOptions): Wallet => ({
   createConnector: () => {
     const ios = isIOS();
 
-    const connector = getWalletConnectConnector({
+    const rpc = rpcUrlsForChains(chains);
+
+    const connector = new WalletConnectConnector({
       chains,
-      qrcode: ios,
+      options: {
+        qrcode: ios,
+        rpc,
+      },
     });
 
     const getUri = async () => (await connector.getProvider()).connector.uri;

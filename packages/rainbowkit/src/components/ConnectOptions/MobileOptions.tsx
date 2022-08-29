@@ -27,7 +27,6 @@ function WalletButton({
 }) {
   const {
     connect,
-    connector,
     iconBackground,
     iconUrl,
     id,
@@ -51,47 +50,20 @@ function WalletButton({
       onClick={useCallback(async () => {
         connect?.();
 
-        // We need to guard against "onConnecting" callbacks being fired
-        // multiple times since connector instances can be shared between
-        // wallets. Ideally wagmi would let us scope the callback to the
-        // specific "connect" call, but this will work in the meantime.
-        let callbackFired = false;
-
         onConnecting?.(async () => {
-          if (callbackFired) return;
-          callbackFired = true;
-
           if (getMobileUri) {
             const mobileUri = await getMobileUri();
-
-            if (connector.id === 'walletConnect') {
-              setWalletConnectDeepLink({ mobileUri, name });
-            }
+            setWalletConnectDeepLink({ mobileUri, name });
 
             if (mobileUri.startsWith('http')) {
-              // Workaround for https://github.com/rainbow-me/rainbowkit/issues/524.
-              // Using 'window.open' causes issues on iOS in non-Safari browsers and
-              // WebViews where a blank tab is left behind after connecting.
-              // This is especially bad in some WebView scenarios (e.g. following a
-              // link from Twitter) where the user doesn't have any mechanism for
-              // closing the blank tab.
-              // For whatever reason, links with a target of "_blank" don't suffer
-              // from this problem, and programmatically clicking a detached link
-              // element with the same attributes also avoids the issue.
-              const link = document.createElement('a');
-              link.href = mobileUri;
-              link.target = '_blank';
-              link.rel = 'noreferrer noopener';
-              link.click();
+              window.open(mobileUri, '_blank', 'noreferrer,noopener');
             } else {
               window.location.href = mobileUri;
             }
           }
         });
-
         shouldCloseModalOnConnecting && onClose();
       }, [
-        connector,
         connect,
         getMobileUri,
         onConnecting,

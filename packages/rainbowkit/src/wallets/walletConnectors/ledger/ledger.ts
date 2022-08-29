@@ -1,8 +1,9 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { Chain } from '../../../components/RainbowKitProvider/RainbowKitChainContext';
 import { isAndroid } from '../../../utils/isMobile';
+import { rpcUrlsForChains } from '../../../utils/rpcUrlsForChains';
 import { Wallet } from '../../Wallet';
-import { getWalletConnectConnector } from '../../getWalletConnectConnector';
 
 export interface LedgerOptions {
   chains: Chain[];
@@ -19,7 +20,14 @@ export const ledger = ({ chains }: LedgerOptions): Wallet => ({
     qrCode: 'https://www.ledger.com/ledger-live/download#download-device-2',
   },
   createConnector: () => {
-    const connector = getWalletConnectConnector({ chains });
+    const rpc = rpcUrlsForChains(chains);
+    const connector = new WalletConnectConnector({
+      chains,
+      options: {
+        qrcode: false,
+        rpc,
+      },
+    });
 
     return {
       connector,
