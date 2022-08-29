@@ -34,10 +34,6 @@
     "ci:example": "pnpm --filter @rainbow-me/rainbowkit* prepare && pnpm --filter example build",
     "ci:site": "pnpm --filter @rainbow-me/rainbowkit* prepare && pnpm --filter site build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Bolero-Music/rainbow-fork"
-  },
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.16.0",
@@ -83,5 +79,13 @@
     "onlyBuiltDependencies": [
       "esbuild"
     ]
-  }
+  },
+  "homepage": "https://github.com/Bolero-Music/rainbow-fork#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bolero-Music/rainbow-fork",
+    "directory": "packages/rainbowkit"
+  },
+  "keywords": [],
+  "author": "Valentin <valentin@boleromusic.com>"
 }
