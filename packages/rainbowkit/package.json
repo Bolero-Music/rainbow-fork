@@ -24,7 +24,7 @@
     "dev": "pnpm build:watch & pnpm typegen:watch",
     "prepare": "MINIFY_CSS=true pnpm build",
     "prebuild": "pnpm typegen",
-    "typecheck": "pnpm tsc",
+    "typecheck": "pnpm tsc --noEmit",
     "typegen": "tsc --emitDeclarationOnly || true",
     "typegen:watch": "tsc --emitDeclarationOnly --watch"
   },
@@ -61,10 +61,12 @@
     "@toruslabs/torus-embed": "^1.23.2",
     "@vanilla-extract/css": "1.7.0",
     "@vanilla-extract/dynamic": "2.0.2",
+    "@vanilla-extract/esbuild-plugin": "^2.1.0",
     "@vanilla-extract/sprinkles": "1.4.1",
     "clsx": "1.1.1",
     "qrcode": "1.5.0",
-    "react-remove-scroll": "2.5.4"
+    "react-remove-scroll": "2.5.4",
+    "wagmi": "^0.6.4"
   },
   "homepage": "https://github.com/Bolero-Music/rainbow-fork#readme",
   "repository": {

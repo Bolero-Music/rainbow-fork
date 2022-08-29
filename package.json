@@ -1,7 +1,7 @@
 {
-  "name": "rainbowkit",
+  "name": "rainbow-fork",
   "private": true,
-  "version": "0.3.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "postinstall": "husky install",
@@ -36,7 +36,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rainbow-me/rainbowkit.git"
+    "url": "git+https://github.com/Bolero-Music/rainbow-fork"
   },
   "license": "MIT",
   "devDependencies": {
