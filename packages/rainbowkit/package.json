@@ -24,7 +24,7 @@
     "dev": "pnpm build:watch & pnpm typegen:watch",
     "prepare": "MINIFY_CSS=true pnpm build",
     "prebuild": "pnpm typegen",
-    "typecheck": "pnpm tsc --noEmit",
+    "typecheck": "pnpm tsc",
     "typegen": "tsc --emitDeclarationOnly || true",
     "typegen:watch": "tsc --emitDeclarationOnly --watch"
   },
